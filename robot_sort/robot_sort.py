@@ -102,15 +102,30 @@ class SortingRobot:
         # While light is on preform tasks
         while self.light_is_on():
 
-            # Pick up first Item
-            self.swap_item()
-
+            # OPTION 1
             # Move right untill held item is larger than list item
                 # Swap Item
                     #Take item to begining of list and repeat with next index
 
+            # OPTION 2
+            # Move right and if the item is less than list swap till end of list
+            # Once end is met swap item and go left
+            while self.can_move_right():
+                self.move_right()
+                if self.compare_item() == -1:
+                    self.swap_item()
+
+            while self.can_move_left():
+                self.swap_item()
+                self.move_left()
+                if self.compare_item() == -1:
+                    self.swap_item()
             
-            break
+            # if self._list == sorted(self._list):
+            #     self.set_light_off
+            if self._item == None:
+                self.set_light_off()
+            
         pass
 
 
